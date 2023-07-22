@@ -1,0 +1,23 @@
+*{margin: 0; padding: 0; box-sizing: border-box; font-family: gilroy;}
+
+*carousel-inner img {
+  width: 100%;
+  height: 100%;
+}
+
+h3{
+  font-family: gilroy;
+  font-weight: 400;
+  color: #7c7c7c;
+}
+
+#nav{
+  position: center;
+  z-index: 99;
+  padding: 0px 200px;
+}
+
+input:focus{
+  color: white;
+  background-color: black;
+}
