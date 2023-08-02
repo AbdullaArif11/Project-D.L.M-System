@@ -8,8 +8,8 @@ $user_not_found = false;
 $vehicle_not_found = false;
 $no_case = false;
 
-if (isset($_SESSION['NID'])){
-  $NID = $_SESSION['NID'];
+if (isset($_GET['NID'])){
+  $NID = $_GET['NID'];
 
   $query = "SELECT * FROM d_l WHERE NID = '$NID'";
   $d_l_result = mysqli_query($con, $query);
@@ -80,19 +80,12 @@ if (isset($_SESSION['NID'])){
   }
 
 } else {
-  header("Location: login-page.php");
+  header("Location: welcome.php");
   exit();
 }
 
 ?>
 
-<?php
-if (isset($_GET['logout'])) {
-  session_destroy();
-  header("Location: login-page.php");
-  exit();
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -144,10 +137,6 @@ if (isset($_GET['logout'])) {
       <li><a>About</a></li>
     </ul>
   </div>
-  <div class="navbar-end">
-    <!-- <a class="btn">Button</a> -->
-    <a href="?logout" class="btn bg-gradient-to-r from-slate-900 via-sky-800 to-cyan-700 border-1 border-white  text-white">Logout</a>
-  </div>
 </div>
   </nav>
 </header>
@@ -155,7 +144,7 @@ if (isset($_GET['logout'])) {
 <main class="bg-gradient-to-r from-slate-900 via-sky-800 to-cyan-700 text-white min-h-screen p-5  md:p-[4rem] lg:p-[6rem]">
 <!-- Displaying User information -->
 <?php if ($user_not_found): ?>
-<p class="text-xl border-b-2 border-gray-200 pb-3 mb-2">Data not found in the User table for the logged-in user.</p>
+<p class="text-xl border-b-2 border-gray-200 pb-3 mb-2">Not signed up yet.</p>
 <?php else: ?>
 <section class="border border-gray-200 rounded-2xl p-5 mb-10">
   <h2 class="text-2xl font-semibold mb-10 text-center">User: <?php echo $Name; ?></h2>
@@ -171,10 +160,10 @@ if (isset($_GET['logout'])) {
 
 <!-- Displaying License information -->
 <?php if ($license_not_found): ?>
-<p class="text-xl border-b-2 border-gray-200 pb-3 mb-2">Data not found in the License table for the logged-in user.</p>
+<p class="text-xl border-b-2 border-gray-200 pb-3 mb-2"></p>
 <?php else: ?>
 <section class="border border-gray-200 rounded-2xl p-5 mb-10">
-  <h2 class="text-2xl font-semibold mb-10 text-center">Your License Information</h2>
+  <h2 class="text-2xl font-semibold mb-10 text-center">License information is incorrect</h2>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Issue/Renewal: <?php echo $Issue_Renewal; ?></p>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Validity: <?php echo $Validity; ?></p>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Licence No: <?php echo $Licence_no; ?></p>
@@ -186,7 +175,7 @@ if (isset($_GET['logout'])) {
 
 <!-- Displaying Vehicle information -->
 <?php if ($vehicle_not_found): ?>
-<p class="text-xl border-b-2 border-gray-200 pb-3 mb-2">Data not found in the Vehicle table for the logged-in user.</p>
+<p class="text-xl border-b-2 border-gray-200 pb-3 mb-2">No vehicle has been registered under this NID yet.</p>
 <?php else: ?>
 <section class="border border-gray-200 rounded-2xl p-5 mb-5">
   <h2 class="text-2xl font-semibold mb-10 text-center">Your Vehicle Document</h2>
@@ -213,21 +202,59 @@ if (isset($_GET['logout'])) {
 
 <!-- Displaying Case information -->
 <?php if ($no_case): ?>
-<p class="text-xl border-b-2 border-gray-200 pb-3 mb-2">Data not found in the Case table for the logged-in user.</p>
+<p class="text-xl border-b-2 border-gray-200 pb-3 mb-2">Case information: Clear (No cases found).</p>
 <?php else: ?>
 <section class="border border-gray-200 rounded-2xl p-5 mb-10">
-  <h2 class="text-2xl font-semibold mb-10 text-center">Your License Information</h2>
+  <h2 class="text-2xl font-semibold mb-10 text-center">Case Information</h2>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Case: <?php echo $case_name; ?></p>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Case-Detail: <?php echo $detail; ?></p>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Fine: <?php echo $fine; ?>tk</p>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Last Payment Date: <?php echo $last_date; ?></p>
-  <div class="flex justify-center">
-  <a name="" id="" class="btn bg-gradient-to-r from-slate-900 border-white  text-white" href="#" role="button">Pay Online</a>
-  </div>
-  
 </section>
 <?php endif; ?>
 
+<section class="mt-10 mb-10 w-36">
+<button class="btn border border-2 border-red-500 text-red-500 hover:border-gray-300 hover:bg-red-500 hover:text-white" onclick="my_modal_4.showModal()"><p>File a new case</p></button>
+<dialog id="my_modal_4" class="modal">
+  <form method="dialog" class="modal-box w-11/12 max-w-5xl">
+    <h3 class="font-bold text-lg">With great commitment and dedication to maintaining law and order, a new case title is added, upholding justice for the community we serve.</h3>
+    <p class="py-4"></p>
+
+
+
+    <div class="h-full border-solid border-2 border-gray-200 rounded-2xl p-10 shadow-2xl text-white">
+    <form action="case-connection.php" method="POST" onsubmit="return validateForm()">
+
+    <div class="form-group my-3">
+      <label>Case Title:</label>
+      <input type="text" name="case_name" class="form-control w-full" autocomplete="off">
+    </div>
+
+    <div class="form-group my-3">
+      <label>Case-Detail:</label>
+      <input type="text" name="detail" class="form-control h-[20rem] w-full" autocomplete="off">
+    </div>
+
+    <div class="form-group my-3">
+      <label>Fine:</label>
+      <input type="text" name="fine" class="form-control w-full" autocomplete="off">
+    </div>
+
+    <div class="form-group my-3">
+      <label>Last Payment Date:</label>
+      <input type="date" name="last_date" class="form-control w-full" autocomplete="off">
+    </div>
+
+    <div class="mt-10 flex justify-center">
+      <button type="submit" class="btn w-[15rem] rounded-full border-1 border-white text-white">Submit</button>
+      <button type="close" class="btn w-[15rem] rounded-full border-1 border-white text-white">Cancel</button>
+    </div>
+
+  </form>
+ </div>
+  </form>
+</dialog>
+</section>
 
 
 </main>

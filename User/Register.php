@@ -1,7 +1,3 @@
-<?php
-    include("connection.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,14 +12,10 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-
-      /* background: linear-gradient(to top, #1E293B, #0083B0, #4FD1C5); */
-      /* background: linear-gradient(to bottom, #1E293B, #0083B0 50%, #4FD1C5); */
       background: linear-gradient(to top, #04080F, #00425A, #1B6468);
       color: white;
     }
     
-    /* New CSS to move the label up */
     .label-up {
       transform: translateY(-1.25rem);
       font-size: 0.75rem;
@@ -60,7 +52,7 @@
   </script>
 
 </head>
-<body>
+<body >
 <header>
   <nav>
   <div class="navbar" style="background-color: #1A2633;">
@@ -99,50 +91,75 @@
 </div>
   </nav>
 </header>
+<main >
+ <div class="hero bg-transparent backdrop-blur-sm h-[600px] max-w-[30rem] border-solid border-2 border-gray-200 rounded-2xl p-10 shadow-2xl text-white">
+ <form action="Register-connection.php" method="POST" onsubmit="return validateForm()">
 
-<main>
-  <div class="hero bg-transparent backdrop-blur-sm h-500 max-w-[64.5rem] border-solid border-2 border-gray-200 rounded-2xl p-10 shadow-2xl text-white">
-    <div class="hero-content flex-col lg:flex-row-reverse">
-
-      <div class="text-center lg:text-left">
-        <h1 class="text-4xl font-bold">Welcome to our Login Page!</h1>
-        <p class="mt-6">Log in securely using your email or National ID (NID) and password. Forgot your password? No problem! Click "Forgot Password?" for a quick recovery.</p>
-        <p class="py-1">New user? Register now and access our services hassle-free.</p>
-        <p class="py-2 font-medium">Happy logging in!</p>
-      </div>
-
-      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-transparent backdrop-blur-md">
-        <div class="card-body">
-          
-        <form action="login.php" action="login.php" method="post">
-          <div class="form-control border-solid border-b-2 border-gray-200 relative ">
-            <label class="label absolute ease-in-out cursor-text">
-              <span class="text-white text-xl">Email</span>
-            </label>
-            <input type="text" name="Email" class="input input-bordered bg-transparent border-0 outline-0 focus:outline-none" required>
-          </div>
-
-          <div class="form-control border-solid border-b-2 border-gray-200 relative mt-5">
-            <label class="label absolute ease-in-out cursor-text">
-              <span class="text-white text-xl">Password</span>
-            </label>
-            <input type="password" name="pass" class="input input-bordered bg-transparent border-0 outline-0 focus:outline-none" required>
-          </div>
-            <a href="#" class="mt-3 hover:underline">Forgot password?</a>
-
-          <div class="form-control mt-6">
-            <input class="btn  rounded-full border-1 border-white" type="submit" name="submit" value="Login">
-          </div>
-        </form>
-
-
-          <p>Don't have an account? <a class="hover:underline" href="">Register</a></p>
-        </div>
-      </div>
+    <div class="form-group my-3">
+      <label>National ID:</label>
+      <input type="text" name="NID" class="form-control w-[25rem]" autocomplete="off">
     </div>
-  </div>
-</main>
 
+    <div class="form-group my-3">
+      <label>Name:</label>
+      <input type="text" name="Name" class="form-control w-[25rem]" autocomplete="off">
+    </div>
+
+    <div class="form-group my-3">
+      <label>Email:</label>
+      <input type="email" name="Email" class="form-control w-[25rem]" autocomplete="off">
+    </div>
+
+    <div class="form-group my-3">
+      <label>District:</label>
+      <input type="text" name="District" class="form-control w-[25rem]" autocomplete="off">
+    </div>
+
+    <div class="form-group my-3">
+        <label>Set a new password:</label>
+        <input type="password" name="pass" id="password" class="form-control w-[25rem]" autocomplete="off">
+    </div>
+
+    <div class="mt-10 flex justify-center">
+      <button type="submit" class="btn w-[15rem] rounded-full border-1 border-white text-white">Sign up</button>
+    </div>
+
+  </form>
+ </div>
+</main>
+<br>
+ <footer>
+  <p class="p-3 bg-dark text-white text-center">Driving License Management System</p>
+ </footer>
+
+
+  <script>
+    function validateForm() {
+      var inputs = document.getElementsByTagName('input');
+      var select = document.getElementsByTagName('select')[0];
+      var incompleteFields = [];
+      
+      for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type === 'text' && inputs[i].value === '') {
+          inputs[i].classList.add('error');
+          incompleteFields.push(inputs[i].name);
+        } else {
+          inputs[i].classList.remove('error');
+        }
+      }
+      if (incompleteFields.length > 0) {
+        var message = 'Please fill in the following fields:\n';
+        for (var k = 0; k < incompleteFields.length; k++) {
+          message += '- ' + incompleteFields[k] + '\n';
+        }
+        alert(message);
+        return false;
+      }
+      
+      return true;
+    }
+  </script>
 
 </body>
+
 </html>

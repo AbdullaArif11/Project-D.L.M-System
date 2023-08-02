@@ -60,7 +60,7 @@ if ($con) {
 }
 mysqli_select_db($con, 'temp');
 
-$query = "SELECT * FROM veichal";
+$query = "SELECT * FROM vehicle";
 $result = mysqli_query($con, $query);
 
 if (mysqli_num_rows($result) > 0) { // check if any rows were returned

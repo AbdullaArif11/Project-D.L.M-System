@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $mfgYear = $_POST['Mfg_Year'];
 
   // Update the row in the veichal table with the new values
-  $query = "UPDATE veichal SET
+  $query = "UPDATE vehicle SET
     Registration_no = '$registrationNo',
     Date = '$date',
     Vehicle_Description = '$vehicleDescription',

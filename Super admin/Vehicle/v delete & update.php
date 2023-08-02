@@ -10,8 +10,8 @@ mysqli_select_db($con, 'temp');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $nid = $_POST['NID'];
 
-  // Check if the NID exists in the veichal table
-  $query = "SELECT * FROM veichal WHERE NID = '$nid'";
+  // Check if the NID exists in the vehicle table
+  $query = "SELECT * FROM vehicle WHERE NID = '$nid'";
   $result = mysqli_query($con, $query);
 
   if (mysqli_num_rows($result) > 0) {

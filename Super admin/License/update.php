@@ -43,7 +43,7 @@ if (isset($_GET['NID'])) {
 
     <div class="form-group">
       <label>Date of Birth:</label>
-      <input type="date" name="Death_of_birth" class="form-control" value="' . $row["Death_of_birth"] . '">
+      <input type="date" name="date_of_birth" class="form-control" value="' . $row["date_of_birth"] . '">
     </div>
 
 

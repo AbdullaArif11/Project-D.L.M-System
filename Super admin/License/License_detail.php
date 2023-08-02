@@ -84,7 +84,7 @@ if (mysqli_num_rows($result) > 0) { // check if any rows were returned
     echo "<tr>
       <td style='border: 2px solid black;'>".$row["NID"]."</td>
       <td style='border: 2px solid black;'>".$row["Name"]."</td>
-      <td style='border: 2px solid black;'>".$row["Death_of_birth"]."</td>
+      <td style='border: 2px solid black;'>".$row["date_of_birth"]."</td>
       <td style='border: 2px solid black;'>".$row["Blood_group"]."</td>
       <td style='border: 2px solid black;'>".$row["Father_or_husband"]."</td>
       <td style='border: 2px solid black;'>".$row["Issue_Renewal"]."</td>

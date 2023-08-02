@@ -22,9 +22,8 @@
       background: linear-gradient(to top, #04080F, #00425A, #1B6468);
       color: white;
     }
-    
-    /* New CSS to move the label up */
-    .label-up {
+
+  .label-up {
       transform: translateY(-1.25rem);
       font-size: 0.75rem;
       color: #ccc;
@@ -33,7 +32,6 @@
 
   </style>
   <script>
-    // JavaScript to handle label animation on click and focus
     document.addEventListener("DOMContentLoaded", function() {
       const inputs = document.querySelectorAll(".input");
       const labels = document.querySelectorAll(".label");
@@ -115,11 +113,12 @@
         <div class="card-body">
           
         <form action="login.php" action="login.php" method="post">
-          <div class="form-control border-solid border-b-2 border-gray-200 relative ">
+
+          <div class="form-control border-solid border-b-2 border-gray-200 relative mt-5">
             <label class="label absolute ease-in-out cursor-text">
-              <span class="text-white text-xl">Email</span>
+              <span class="text-white text-xl">ID</span>
             </label>
-            <input type="text" name="Email" class="input input-bordered bg-transparent border-0 outline-0 focus:outline-none" required>
+            <input type="text" name="ID" class="input input-bordered bg-transparent border-0 outline-0 focus:outline-none" required>
           </div>
 
           <div class="form-control border-solid border-b-2 border-gray-200 relative mt-5">
@@ -128,6 +127,7 @@
             </label>
             <input type="password" name="pass" class="input input-bordered bg-transparent border-0 outline-0 focus:outline-none" required>
           </div>
+
             <a href="#" class="mt-3 hover:underline">Forgot password?</a>
 
           <div class="form-control mt-6">
@@ -135,8 +135,6 @@
           </div>
         </form>
 
-
-          <p>Don't have an account? <a class="hover:underline" href="">Register</a></p>
         </div>
       </div>
     </div>

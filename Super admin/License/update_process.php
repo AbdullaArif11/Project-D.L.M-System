@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Retrieve the form data
   $nid = $_POST['NID'];
   $name = $_POST['Name'];
-  $dob = $_POST['Death_of_birth'];
+  $dob = $_POST['date_of_birth'];
   $bloodGroup = $_POST['Blood_group'];
   $fatherOrHusband = $_POST['Father_or_husband'];
   $issueRenewal = $_POST['Issue_Renewal'];
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Update the row in the d_l table with the new values
   $query = "UPDATE d_l SET
     Name = '$name',
-    Death_of_birth = '$dob',
+    date_of_birth = '$dob',
     Blood_group = '$bloodGroup',
     Father_or_husband = '$fatherOrHusband',
     Issue_Renewal = '$issueRenewal',

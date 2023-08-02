@@ -1,42 +1,3 @@
-<?php
-$con = mysqli_connect('localhost', 'root');
-if ($con) {
-  echo "";
-} else {
-  echo "Connection Error!";
-}
-mysqli_select_db($con, 'temp');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $nid = $_POST['NID'];
-
-  // Check if the NID exists in the veichal table
-  $query = "SELECT * FROM Traffic_admin WHERE NID = '$nid'";
-  $result = mysqli_query($con, $query);
-
-  if (mysqli_num_rows($result) > 0) {
-    // NID exists, display details and options
-    echo 'NID exists. Details:';
-    echo '<div class="details">';
-    
-    // Display additional details of the record
-    $row = mysqli_fetch_assoc($result);
-    echo '<p>Name: ' . $row["Name"] . '</p>';
-    echo '<p>Email: ' . $row["Email"] . '</p>';
-    
-    echo '<a href="delete.php?NID=' . $nid . '"><button class="option-button">Delete</button></a>';
-    echo '<a href="update.php?NID=' . $nid . '"><button class="option-button">Update</button></a>';
-    
-    echo '</div>';
-  } else {
-    // NID does not exist
-    echo "NID does not exist.";
-  }
-}
-
-mysqli_close($con);
-?>
-
 <!-- HTML Form -->
 <!DOCTYPE html>
   <html lang="en">
@@ -101,3 +62,43 @@ mysqli_close($con);
   </footer>
 </body>
 </html>
+
+
+<?php
+$con = mysqli_connect('localhost', 'root');
+if ($con) {
+  echo "";
+} else {
+  echo "Connection Error!";
+}
+mysqli_select_db($con, 'temp');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $nid = $_POST['NID'];
+
+  // Check if the NID exists in the Traffic_admin table
+  $query = "SELECT * FROM police_admin WHERE ID = '$nid'";
+  $result = mysqli_query($con, $query);
+
+  if (mysqli_num_rows($result) > 0) {
+    // NID exists, display details and options
+    echo 'NID exists. Details:';
+    echo '<div class="details">';
+    
+    // Display additional details of the record
+    $row = mysqli_fetch_assoc($result);
+    echo '<p>Name: ' . $row["Name"] . '</p>';
+    echo '<p>Email: ' . $row["Email"] . '</p>';
+    
+    echo '<a href="delete.php?NID=' . $nid . '"><button class="option-button">Delete</button></a>';
+    echo '<a href="update.php?NID=' . $nid . '"><button class="option-button">Update</button></a>';
+    
+    echo '</div>';
+  } else {
+    // NID does not exist
+    echo "NID does not exist.";
+  }
+}
+
+mysqli_close($con);
+?>

@@ -12,11 +12,11 @@ if (isset($_GET['NID'])) {
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Confirm delete when the form is submitted
-    $query = "DELETE FROM vehicle WHERE NID = '$nid'";
+    $query = "DELETE FROM actions WHERE NID = '$nid'";
     $result = mysqli_query($con, $query);
 
     if ($result) {
-      echo "";
+      header("Location: TCR list.php");
     } else {
       echo "Error deleting row: " . mysqli_error($con);
     }

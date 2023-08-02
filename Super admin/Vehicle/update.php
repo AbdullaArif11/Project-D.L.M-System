@@ -11,7 +11,7 @@ if (isset($_GET['NID'])) {
   $nid = $_GET['NID'];
   
   // Fetch the row with the specified NID from the veichal table
-  $query = "SELECT * FROM veichal WHERE NID = '$nid'";
+  $query = "SELECT * FROM vehicle WHERE NID = '$nid'";
   $result = mysqli_query($con, $query);
   
   if (mysqli_num_rows($result) > 0) {

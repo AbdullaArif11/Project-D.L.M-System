@@ -22,7 +22,7 @@ $Owner_Type = $_POST['Owner_Type'];
 $Tyre_Size = $_POST['Tyre_Size'];
 $Mfg_Year = $_POST['Mfg_Year'];
 
-$query = "INSERT INTO veichal(NID, Registration_no, Date, Vehicle_Description, Vehicle_Class, Color, CC, Fuel, Seat, Engine_no, Chassis_no, Hire, Wheel_Base, Weight_kg, Issuing_Authority, Owner’s_Name_and_Address, Owner_Type, Tyre_Size, Mfg_Year) 
+$query = "INSERT INTO vehicle(NID, Registration_no, Date, Vehicle_Description, Vehicle_Class, Color, CC, Fuel, Seat, Engine_no, Chassis_no, Hire, Wheel_Base, Weight_kg, Issuing_Authority, Owner’s_Name_and_Address, Owner_Type, Tyre_Size, Mfg_Year) 
 VALUES ('$NID', '$Registration_no', '$Date', '$Vehicle_Description', '$Vehicle_Class', '$Color', '$CC', '$Fuel', '$Seat', '$Engine_no', '$Chassis_no', '$Hire', '$Wheel_Base', '$Weight_kg', '$Issuing_Authority', '$Owner_Name_and_Address', '$Owner_Type', '$Tyre_Size', '$Mfg_Year')";
 
 mysqli_query($con, $query);

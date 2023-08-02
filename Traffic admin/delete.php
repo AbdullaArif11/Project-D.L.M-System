@@ -12,7 +12,7 @@ if (isset($_GET['NID'])) {
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Confirm delete when the form is submitted
-    $query = "DELETE FROM vehicle WHERE NID = '$nid'";
+    $query = "DELETE FROM policeinfo WHERE ID = '$nid'";
     $result = mysqli_query($con, $query);
 
     if ($result) {

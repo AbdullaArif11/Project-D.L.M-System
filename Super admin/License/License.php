@@ -63,7 +63,7 @@
 
     <div class="form-group">
       <label>Date of Birth:</label>
-      <input type="date" name="Death_of_birth" class="form-control" autocomplete="off">
+      <input type="date" name="date_of_birth" class="form-control" autocomplete="off">
     </div>
 
 

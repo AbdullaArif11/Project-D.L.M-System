@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Display additional details of the record
     $row = mysqli_fetch_assoc($result);
     echo '<p>Name: ' . $row["Name"] . '</p>';
-    echo '<p>Date of Birth: ' . $row["Death_of_birth"] . '</p>';
+    echo '<p>Date of Birth: ' . $row["date_of_birth"] . '</p>';
     
     echo '<a href="delete.php?NID=' . $nid . '"><button class="option-button">Delete</button></a>';
     echo '<a href="update.php?NID=' . $nid . '"><button class="option-button">Update</button></a>';

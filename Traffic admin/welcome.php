@@ -7,14 +7,14 @@ if (isset($_SESSION['ID'])){
   $ID = $_SESSION['ID'];
 
 
-  $query = "SELECT * FROM policeinfo WHERE ID = '$ID'";
+  $query = "SELECT * FROM police_admin WHERE ID = '$ID'";
   $user_result = mysqli_query($con, $query);
   if (mysqli_num_rows($user_result) == 1) {
     $user_row = mysqli_fetch_array($user_result, MYSQLI_ASSOC);
     $Name = $user_row['Name'];
     $ID = $user_row['ID'];
     $Email = $user_row['Email'];
-    $Thana = $user_row['Thana'];
+    $Rank = $user_row['Rank'];
     $District = $user_row['District'];
     $pass = $user_row['pass'];
   } else {
@@ -107,22 +107,34 @@ if (isset($_GET['logout'])) {
 
 <!-- Displaying User information -->
 <section class="border border-gray-200 rounded-2xl p-5 mb-10">
-  <h2 class="text-2xl font-semibold mb-10 text-center"> <?php echo $Name; ?></h2>
-  <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">ID: <?php echo $ID; ?></p>
+  <h2 class="text-2xl font-semibold mb-10 text-center">Admin: <?php echo $Name; ?></h2>
+  <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">ND: <?php echo $ID; ?></p>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Email: <?php echo $Email; ?></p>
-  <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Thana: <?php echo $Thana; ?></p>
+  <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Rank: <?php echo $Rank; ?></p>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">District: <?php echo $District; ?></p>
   <p class="text-xl border-b-2 border-gray-200 pb-3 mb-5">Password: <?php echo $pass; ?></p>
 </section>
 
+<div class="h-10 border border-gray-200 rounded-[5px] mb-10 hover2" style="background-color: #1A2633;">
+  <a href="TCR list.php"><p class="font-bold ml-4 mt-1 ">Traffic Case Records</p></a>
+</div>
+
+<div class="h-10 border border-gray-200 rounded-[5px] mb-10 hover2" style="background-color: #1A2633;">
+  <a href="TF list.php"><p class="font-bold ml-4 mt-1 ">Register List of Traffic Police</p></a>
+</div>
+
+<div class="h-10 border border-gray-200 rounded-[5px] mb-10 hover2" style="background-color: #1A2633;">
+  <a href="#"><p class="font-bold ml-4 mt-1 ">Recruitment of new traffic police</p></a>
+</div>
+
 <div class="border border-gray-200 rounded-2xl p-5 mb-10 flex flex-col justify-center">
-  <h2 class="font-extrabold mb-5 text-center text-2xl">Search User Information</h2>
+  <h2 class="font-extrabold mb-5 text-center text-2xl">Search  recruitment traffic police</h2>
 <div class="">
 <form action="" method="POST">
   <div class="form-group">
-    <input type="text" placeholder="Enter NID" name="NID" class="form-control w-full bg-white text-black" autocomplete="off" required>
+    <input type="text" placeholder="Enter ID" name="ID" class="form-control w-full bg-white text-black" autocomplete="off" required>
   </div>
-  <button type="submit" class="btn border border-gray-200 h-10 mt-3">Search</button>
+  <button type="submit" class="btn border border-gray-200 h-10 mt-3">Search ID</button>
 </form>
   </div>
 
@@ -132,23 +144,58 @@ if (isset($_GET['logout'])) {
   <?php
 include("connection.php");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $NID = $_POST['NID'];
+if (isset($_SESSION['ID'])) {
+  $ID = $_SESSION['ID'];
 
-  $query = "SELECT * FROM d_l WHERE NID = '$NID'";
+  $query = "SELECT * FROM police_admin WHERE ID = '$ID'";
+  $user_result = mysqli_query($con, $query);
+
+  if (mysqli_num_rows($user_result) == 1) {
+    $user_row = mysqli_fetch_array($user_result, MYSQLI_ASSOC);
+    $Name = $user_row['Name'];
+    $ID = $user_row['ID'];
+    $Email = $user_row['Email'];
+    $Rank = $user_row['Rank'];
+    $District = $user_row['District'];
+    $pass = $user_row['pass'];
+  } else {
+    echo 'Data-connection error!';
+  }
+} else {
+  header("Location: login-page.php");
+  exit();
+}
+
+if (isset($_GET['logout'])) {
+  session_destroy();
+  header("Location: login-page.php");
+  exit();
+}
+
+// Process the search form
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $ID = $_POST['ID'];
+
+  // Check if the NID exists in the policeinfo table
+  $query = "SELECT * FROM policeinfo WHERE ID = '$ID'";
   $result = mysqli_query($con, $query);
 
   if (mysqli_num_rows($result) > 0) {
-    echo 'Valid';
+    // NID exists, display details and options
+    echo 'ID exists. Details:';
     echo '<div class="details">';
     
+    // Display additional details of the record
     $row = mysqli_fetch_assoc($result);
     echo '<p>Name: ' . $row["Name"] . '</p>';
-    echo '<p>License no: ' . $row["LIcence_no"] . '</p>';
-    echo '<a href="userinfo.php?NID=' . $NID . '"><button class="btn border hover:border-gray-200 h-10 mt-3 mr-5 option-button">Details</button></a>';
+    echo '<p>Email: ' . $row["Email"] . '</p>';
+    
+    echo '<a href="delete.php?NID=' . $ID . '"><button class="btn border hover:border-gray-200 h-10 mt-3 mr-5 option-button">Delete</button></a>';
+    echo '<a href="update.php?NID=' . $ID . '"><button class="btn border hover:border-gray-200 h-10 mt-3 option-button">Update</button></a>';
+    
     echo '</div>';
   } else {
-    echo "NID not found in database.";
+    echo "ID does not exist.";
   }
 }
 
@@ -157,12 +204,7 @@ mysqli_close($con);
 
 </div>
 
-<section class="flex justify-center">
-  <!-- Wrap the button inside an anchor tag and set the href attribute to the URL of the other page -->
-  <a href="file a case.php" class="w-80 btn border border-2 border-red-500 text-red-500 hover:border-gray-300 hover:bg-red-500 hover:text-white">
-    <p>File a new case</p>
-  </a>
-</section>
+
 
 
 </main>
